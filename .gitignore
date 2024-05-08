@@ -1,0 +1,9 @@
+buildAll.bat
+
+/lambdas/init_service/target/*
+/lambdas/save_service/target/*
+
+/lambdas/init_service/*.bat
+/lambdas/save_service/*.bat
+
+*txt
