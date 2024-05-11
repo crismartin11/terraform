@@ -1,6 +1,6 @@
 resource "aws_api_gateway_rest_api" "my_api" {
-    name = "my_api"
-    description = "My API Gateway"
+  name        = "my_api_notes"
+  description = "My API Gateway"
 
 }
 
@@ -34,17 +34,16 @@ resource "aws_api_gateway_integration" "my_integration_step_function" {
   rest_api_id = aws_api_gateway_rest_api.my_api.id
   resource_id = aws_api_gateway_resource.my_resource.id
 
-  http_method = aws_api_gateway_method.post_method.http_method
+  http_method             = aws_api_gateway_method.post_method.http_method
   integration_http_method = "POST"
   #type = "MOCK"
   type = "AWS"
-  uri = "arn:aws:apigateway:us-east-1:states:action/StartExecution"
- 
- 
+  uri  = "arn:aws:apigateway:us-east-1:states:action/StartExecution"
+
+
   credentials = aws_iam_role.iam_for_apigw_start_sfn.arn
 
   request_templates = {
-    #"application/json" = "{ \"body\": \"dd\", \"stateMachineArn\": \"${aws_sfn_state_machine.my_processor_sf.arn}\" }"
     "application/json" = <<EOF
     #set($input = $input.json('$'))
     {
@@ -69,7 +68,7 @@ resource "aws_api_gateway_method_response" "express_response_200" {
   response_parameters = {
     "method.response.header.Access-Control-Allow-Headers" = true,
     "method.response.header.Access-Control-Allow-Methods" = true,
-    "method.response.header.Access-Control-Allow-Origin" = true
+    "method.response.header.Access-Control-Allow-Origin"  = true
   }
 }
 
@@ -88,10 +87,10 @@ resource "aws_api_gateway_integration_response" "express_response_200" {
 
   //cors
   response_parameters = {
-    "method.response.header.Access-Control-Allow-Headers" =  "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
+    "method.response.header.Access-Control-Allow-Headers" = "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
     "method.response.header.Access-Control-Allow-Methods" = "'GET,OPTIONS,POST,PUT'",
-    "method.response.header.Access-Control-Allow-Origin" = "'*'"
+    "method.response.header.Access-Control-Allow-Origin"  = "'*'"
   }
 
-  depends_on = [ aws_api_gateway_method.post_method, aws_api_gateway_integration.my_integration_step_function ]
+  depends_on = [aws_api_gateway_method.post_method, aws_api_gateway_integration.my_integration_step_function]
 }

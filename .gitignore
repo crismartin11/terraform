@@ -7,3 +7,8 @@ buildAll.bat
 /lambdas/save_service/*.bat
 
 *txt
+*.hcl
+*.tfstate
+*.backup
+*.tfplan
+.terraform/*

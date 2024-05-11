@@ -1,10 +1,10 @@
 variable "user_creds" {
-    description = "User aws credentials"
-    type = map(string)
-    sensitive = true
+  description = "User aws credentials"
+  type        = map(string)
+  sensitive   = true
 
-    default = {
-        client_id = "a"
-        client_secret = "b"
-    }
+  # default = {
+  #     client_id = "test-credential-a"
+  #     client_secret = "test-credential-b"
+  # }
 }

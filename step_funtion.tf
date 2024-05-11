@@ -1,9 +1,9 @@
 # Step Functions State Machine
 resource "aws_sfn_state_machine" "my_processor_sf" {
-    name     = "my_processor_sf"
-    role_arn = aws_iam_role.step_functions_role.arn
+  name     = "my_processor_sf"
+  role_arn = aws_iam_role.step_functions_role.arn
 
-    definition = <<EOF
+  definition = <<EOF
 {
     "Comment": "execute lambdas",
     "StartAt": "InitService",
